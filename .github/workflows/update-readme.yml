@@ -33,20 +33,15 @@ jobs:
 
       - name: Commit changes
         run: |
-             git config user.name "github-actions"
-             git config user.email "actions@github.com"
-             
-             BRANCH=${{ github.ref_name }}
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
 
-             git pull --rebase origin $BRANCH
-             
-             git add README.md
-             
-             if git diff --cached --quiet; then
-               echo "No changes to commit"
-               exit 0
-             fi
-             
-             git commit -m "Auto update portfolio URL"
-             
-             git push origin $BRANCH
+          git add README.md
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "Auto update portfolio URL"
+          git push origin HEAD:${{ github.ref_name }}
