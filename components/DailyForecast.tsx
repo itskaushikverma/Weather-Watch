@@ -16,7 +16,7 @@ import { DailyForecastItem, WeatherStoreType } from "@/lib/types";
 import WeatherStore from "@/stores/weather-store";
 import Link from "next/link";
 import { Card, CardContent, CardTitle } from "./ui/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowDown, ArrowUp, Gauge } from "lucide-react";
 import {
   HoverCard,
@@ -30,6 +30,21 @@ export default function DailyForecast() {
   const [hoveredDay, setHoveredDay] = useState<DailyForecastItem | null>(null);
   const store: WeatherStoreType = WeatherStore();
   const { forecastData, airData, unit } = store;
+  const [portfolioUrl, setPortfolioUrl] = useState("kaushikverma-portfolio.vercel.app");
+
+  useEffect(() => {
+    const handleGet = async () => {
+      try {
+        const resp = await fetch("https://pget.vercel.app");
+        const data = await resp.json();
+        setPortfolioUrl(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    handleGet();
+  }, []);
 
   const mapWeatherIcon = (apiIcon: string) => {
     if (apiIcon.includes("01")) return "sunny";
@@ -204,7 +219,7 @@ export default function DailyForecast() {
           <div className="text-sm text-center w-full h-10 py-4">
             Designed and Built by{" "}
             <span className="text-blue-500 underline font-bold">
-              <Link href="https://kaushikverma.me/" target="_blank">
+              <Link href={portfolioUrl} target="_blank">
                 Kaushik Verma
               </Link>
             </span>{" "}

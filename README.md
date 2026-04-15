@@ -29,7 +29,7 @@ Follow these steps to run the project locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/kaushik-2318/weather-watch.git
+   git clone https://github.com/itskaushikverma/weather-watch.git
    cd weather-watch
    ```
 
@@ -77,4 +77,4 @@ See the [LICENSE](./LICENSE) file for more information.
 ## 👨‍💻 Author
 
 **Kaushik Verma**  
-[LinkedIn](https://www.linkedin.com/in/kaushik-verma-2b5515254/) | [Portfolio](https://kaushikverma.me/)
+[LinkedIn](www.linkedin.com/in/itskaushikverma) | [Portfolio](https://kaushikverma.com/)
