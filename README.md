@@ -77,4 +77,4 @@ See the [LICENSE](./LICENSE) file for more information.
 ## 👨‍💻 Author
 
 **Kaushik Verma**  
-[LinkedIn](www.linkedin.com/in/itskaushikverma) | [Portfolio](https://www.kaushikverma.com/) | [GitHub](https://github.com/itskaushikverma) | [Twitter](https://twitter.com/itskaushikverma)
+[LinkedIn](www.linkedin.com/in/itskaushikverma) | [Portfolio]({"portfolio":"https://www.kaushikverma.com","x":"https://x.com/SilentK68296830","linkedin":"https://www.linkedin.com/in/itskaushikverma","github":"https://github.com/itskaushikverma"}) | [GitHub](https://github.com/itskaushikverma) | [Twitter](https://twitter.com/itskaushikverma)
