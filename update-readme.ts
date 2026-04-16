@@ -13,14 +13,18 @@ function fetchURL(): Promise<string> {
                 });
 
                 res.on("end", () => {
-                    const trimmed = data.trim();
+                    let cleaned = data.trim();
 
                     try {
-                        const parsed = JSON.parse(trimmed) as { url?: string };
-                        resolve(parsed.url ?? trimmed);
+                        const parsed = JSON.parse(cleaned) as { url?: string };
+                        cleaned = parsed.url ?? cleaned;
                     } catch {
-                        resolve(trimmed);
+                        // not JSON → continue
                     }
+
+                    cleaned = cleaned.replace(/^"(.*)"$/, "$1");
+
+                    resolve(cleaned);
                 });
             })
             .on("error", reject);
