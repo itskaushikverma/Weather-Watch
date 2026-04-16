@@ -46,8 +46,8 @@ jobs:
             # 1. Commit the staged changes
             git commit -m "Auto update portfolio URL"
             
-            # 2. Pull remote changes (rebase moves your commit to the top)
-            git pull --rebase origin ${{ github.ref_name }}
+            # 2. Pull remote changes safely by autostashing any incidental modifications (like package-lock.json)
+            git pull --rebase --autostash origin ${{ github.ref_name }}
             
             # 3. Push the clean history
             git push origin ${{ github.ref_name }}
