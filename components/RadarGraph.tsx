@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Radar,
   RadarChart,
@@ -6,12 +6,12 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
   Tooltip,
-} from "recharts";
+} from 'recharts';
 
-import { normalizeValue } from "@/lib/normalizeValue";
-import WeatherStore from "@/stores/weather-store";
-import { WeatherStoreType } from "@/lib/types";
-import Loader from "./Loader";
+import { normalizeValue } from '@/lib/normalizeValue';
+import WeatherStore from '@/stores/weather-store';
+import { WeatherStoreType } from '@/lib/types';
+import Loader from './Loader';
 
 export default function RadarGraph() {
   const store: WeatherStoreType = WeatherStore();
@@ -19,32 +19,32 @@ export default function RadarGraph() {
 
   const data = [
     {
-      para: "Temperature",
-      value: normalizeValue("Temperature", weatherData?.main.temp ?? 0),
+      para: 'Temperature',
+      value: normalizeValue('Temperature', weatherData?.main.temp ?? 0),
     },
     {
-      para: "Humidity",
-      value: normalizeValue("Humidity", weatherData?.main.humidity ?? 0),
+      para: 'Humidity',
+      value: normalizeValue('Humidity', weatherData?.main.humidity ?? 0),
     },
     {
-      para: "Wind Speed",
-      value: normalizeValue("Wind Speed", weatherData?.wind.speed ?? 0),
+      para: 'Wind Speed',
+      value: normalizeValue('Wind Speed', weatherData?.wind.speed ?? 0),
     },
     {
-      para: "Cloud Cover",
-      value: normalizeValue("Cloud Cover", weatherData?.clouds.all ?? 0),
+      para: 'Cloud Cover',
+      value: normalizeValue('Cloud Cover', weatherData?.clouds.all ?? 0),
     },
     {
-      para: "Pressure",
-      value: normalizeValue("Pressure", weatherData?.main.pressure ?? 0),
+      para: 'Pressure',
+      value: normalizeValue('Pressure', weatherData?.main.pressure ?? 0),
     },
     {
-      para: "Feels Like",
-      value: normalizeValue("Feels Like", weatherData?.main.feels_like ?? 0),
+      para: 'Feels Like',
+      value: normalizeValue('Feels Like', weatherData?.main.feels_like ?? 0),
     },
   ];
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border">
+    <div className="flex h-full w-full flex-col items-center justify-center rounded-xl border bg-white/10 shadow-sm backdrop-blur-sm">
       {isLoading ? (
         <Loader />
       ) : (

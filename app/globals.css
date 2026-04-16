@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -124,7 +124,7 @@
 
 .loader {
   width: 45px;
-  aspect-ratio: .75;
+  aspect-ratio: 0.75;
   --c: no-repeat linear-gradient(#fff 0 0);
   background:
     var(--c) 0% 50%,
@@ -135,27 +135,45 @@
 
 @keyframes l7 {
   0% {
-    background-size: 20% 50%, 20% 50%, 20% 50%
+    background-size:
+      20% 50%,
+      20% 50%,
+      20% 50%;
   }
 
   20% {
-    background-size: 20% 20%, 20% 50%, 20% 50%
+    background-size:
+      20% 20%,
+      20% 50%,
+      20% 50%;
   }
 
   40% {
-    background-size: 20% 100%, 20% 20%, 20% 50%
+    background-size:
+      20% 100%,
+      20% 20%,
+      20% 50%;
   }
 
   60% {
-    background-size: 20% 50%, 20% 100%, 20% 20%
+    background-size:
+      20% 50%,
+      20% 100%,
+      20% 20%;
   }
 
   80% {
-    background-size: 20% 50%, 20% 50%, 20% 100%
+    background-size:
+      20% 50%,
+      20% 50%,
+      20% 100%;
   }
 
   100% {
-    background-size: 20% 50%, 20% 50%, 20% 50%
+    background-size:
+      20% 50%,
+      20% 50%,
+      20% 50%;
   }
 }
 

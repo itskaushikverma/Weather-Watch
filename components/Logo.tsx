@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 interface LogoProps {
-  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   animated?: boolean;
-  timeOfDay?: "morning" | "evening" | "night";
+  timeOfDay?: 'morning' | 'evening' | 'night';
   circle?: boolean;
 }
 
 export default function Logo({
-  size = "md",
+  size = 'md',
   animated = true,
   timeOfDay,
   circle = true,
 }: LogoProps) {
-  const [currentTimeOfDay, setCurrentTimeOfDay] = useState<
-    "morning" | "evening" | "night"
-  >(timeOfDay || "morning");
+  const [currentTimeOfDay, setCurrentTimeOfDay] = useState<'morning' | 'evening' | 'night'>(
+    timeOfDay || 'morning',
+  );
 
   const dimensions = {
     xs: { width: 30, height: 30 },
@@ -35,32 +35,32 @@ export default function Logo({
     }
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 16) {
-      setCurrentTimeOfDay("morning");
+      setCurrentTimeOfDay('morning');
     } else if (hour >= 16 && hour < 19) {
-      setCurrentTimeOfDay("evening");
+      setCurrentTimeOfDay('evening');
     } else {
-      setCurrentTimeOfDay("night");
+      setCurrentTimeOfDay('night');
     }
   }, [timeOfDay]);
 
   const colorSchemes = {
     morning: {
-      primary: "#60a5fa",
-      secondary: "#93c5fd",
-      accent: "#3b82f6",
-      glow: "#2563eb",
+      primary: '#60a5fa',
+      secondary: '#93c5fd',
+      accent: '#3b82f6',
+      glow: '#2563eb',
     },
     evening: {
-      primary: "#c084fc",
-      secondary: "#a855f7",
-      accent: "#8b5cf6",
-      glow: "#7c3aed",
+      primary: '#c084fc',
+      secondary: '#a855f7',
+      accent: '#8b5cf6',
+      glow: '#7c3aed',
     },
     night: {
-      primary: "#2dd4bf",
-      secondary: "#14b8a6",
-      accent: "#0d9488",
-      glow: "#0f766e",
+      primary: '#2dd4bf',
+      secondary: '#14b8a6',
+      accent: '#0d9488',
+      glow: '#0f766e',
     },
   };
 
@@ -71,9 +71,9 @@ export default function Logo({
       className="relative"
       style={{ width: dimensions[size].width, height: dimensions[size].height }}
     >
-      <div className="absolute inset-0 flex items-center justify-center ">
+      <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
-          className="absolute w-full h-full rounded-full"
+          className="absolute h-full w-full rounded-full"
           style={{
             background: `radial-gradient(circle, rgba(0,0,0,0) 30%, ${colors.primary}40 100%)`,
             boxShadow: `0 0 20px ${colors.glow}80`,
@@ -82,16 +82,16 @@ export default function Logo({
           transition={{
             duration: 3,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
         />
 
         <motion.div
           className="absolute"
           style={{
-            width: "90%",
-            height: "90%",
-            borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
+            width: '90%',
+            height: '90%',
+            borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
             border: `2px solid ${colors.primary}`,
             boxShadow: `0 0 10px ${colors.glow}`,
           }}
@@ -100,9 +100,9 @@ export default function Logo({
               ? {
                   rotate: 360,
                   borderRadius: [
-                    "30% 70% 70% 30% / 30% 30% 70% 70%",
-                    "50% 50% 50% 50%",
-                    "30% 70% 70% 30% / 30% 30% 70% 70%",
+                    '30% 70% 70% 30% / 30% 30% 70% 70%',
+                    '50% 50% 50% 50%',
+                    '30% 70% 70% 30% / 30% 30% 70% 70%',
                   ],
                 }
               : {}
@@ -110,16 +110,16 @@ export default function Logo({
           transition={{
             duration: 15,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
+            ease: 'linear',
           }}
         />
 
         <motion.div
           className="absolute"
           style={{
-            width: "70%",
-            height: "70%",
-            borderRadius: "50% 50% 50% 50% / 60% 40% 60% 40%",
+            width: '70%',
+            height: '70%',
+            borderRadius: '50% 50% 50% 50% / 60% 40% 60% 40%',
             border: `2px solid ${colors.secondary}`,
             boxShadow: `0 0 10px ${colors.glow}`,
           }}
@@ -128,9 +128,9 @@ export default function Logo({
               ? {
                   rotate: -360,
                   borderRadius: [
-                    "50% 50% 50% 50% / 60% 40% 60% 40%",
-                    "40% 60% 40% 60% / 50% 50% 50% 50%",
-                    "50% 50% 50% 50% / 60% 40% 60% 40%",
+                    '50% 50% 50% 50% / 60% 40% 60% 40%',
+                    '40% 60% 40% 60% / 50% 50% 50% 50%',
+                    '50% 50% 50% 50% / 60% 40% 60% 40%',
                   ],
                 }
               : {}
@@ -138,24 +138,24 @@ export default function Logo({
           transition={{
             duration: 20,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
+            ease: 'linear',
           }}
         />
 
         <motion.div
           className="absolute flex items-center justify-center"
           style={{
-            width: "50%",
-            height: "50%",
+            width: '50%',
+            height: '50%',
             background: `radial-gradient(circle, ${colors.primary} 0%, ${colors.accent} 100%)`,
-            borderRadius: "50%",
+            borderRadius: '50%',
             boxShadow: `0 0 15px ${colors.glow}`,
           }}
           animate={animated ? { scale: [1, 1.1, 1] } : {}}
           transition={{
             duration: 2,
             repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
         >
           <svg
@@ -165,9 +165,9 @@ export default function Logo({
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            style={{ width: "60%", height: "60%", color: "#fff" }}
+            style={{ width: '60%', height: '60%', color: '#fff' }}
           >
-            {currentTimeOfDay === "morning" ? (
+            {currentTimeOfDay === 'morning' ? (
               <>
                 <circle cx="12" cy="12" r="5"></circle>
                 <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -179,7 +179,7 @@ export default function Logo({
                 <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
               </>
-            ) : currentTimeOfDay === "evening" ? (
+            ) : currentTimeOfDay === 'evening' ? (
               <>
                 <path d="M17 18a5 5 0 0 0-10 0"></path>
                 <line x1="12" y1="9" x2="12" y2="2"></line>
@@ -202,7 +202,7 @@ export default function Logo({
 
         {circle && (
           <motion.div
-            className="absolute w-3 h-3 rounded-full"
+            className="absolute h-3 w-3 rounded-full"
             style={{
               background: colors.secondary,
               boxShadow: `0 0 10px ${colors.glow}`,
@@ -218,8 +218,8 @@ export default function Logo({
             transition={{
               duration: 3,
               repeat: Number.POSITIVE_INFINITY,
-              repeatType: "reverse",
-              ease: "easeInOut",
+              repeatType: 'reverse',
+              ease: 'easeInOut',
             }}
           />
         )}

@@ -1,23 +1,22 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import WeatherHeader from "@/components/WeatherHeader";
-import CurrentWeather from "@/components/CurrentWeather";
-import LineGraph from "@/components/LineGraph";
-import PieGraph from "@/components/PieGraph";
-import RadarGraph from "@/components/RadarGraph";
-import WeatherStore from "@/stores/weather-store";
-import LocationStore from "@/stores/location-store";
-import SearchPanel from "@/components/SearchPanel";
-import { WeatherStoreType } from "@/lib/types";
-import DailyForecast from "@/components/DailyForecast";
-import toast from "react-hot-toast";
-import PreLoader from "@/components/PreLoader";
+import { useState, useEffect, useCallback, useRef } from 'react';
+import WeatherHeader from '@/components/WeatherHeader';
+import CurrentWeather from '@/components/CurrentWeather';
+import LineGraph from '@/components/LineGraph';
+import PieGraph from '@/components/PieGraph';
+import RadarGraph from '@/components/RadarGraph';
+import WeatherStore from '@/stores/weather-store';
+import LocationStore from '@/stores/location-store';
+import SearchPanel from '@/components/SearchPanel';
+import { WeatherStoreType } from '@/lib/types';
+import DailyForecast from '@/components/DailyForecast';
+import toast from 'react-hot-toast';
+import PreLoader from '@/components/PreLoader';
 
 export default function WeatherDashboard() {
   const store: WeatherStoreType = WeatherStore();
-  const { weatherData, forecastData, fetchWeatherData, currentCoordinate } =
-    store;
+  const { weatherData, forecastData, fetchWeatherData, currentCoordinate } = store;
 
   const latitude = LocationStore((state) => state.latitude);
   const longitude = LocationStore((state) => state.longitude);
@@ -36,40 +35,38 @@ export default function WeatherDashboard() {
     async ({ lat, lon, unit }: { lat: number; lon: number; unit: string }) => {
       fetchWeatherData({ lat, lon, unit });
     },
-    [fetchWeatherData]
+    [fetchWeatherData],
   );
 
   const getCityByIP = useCallback(async () => {
     try {
-      const response = await fetch("https://ipapi.co/json/");
+      const response = await fetch('https://ipapi.co/json/');
       const data = await response.json();
       updateLocation(data.latitude, data.longitude);
       currentCoordinate(data.latitude, data.longitude);
     } catch (err) {
-      console.error("Error fetching location by IP:", err);
-      toast.error("Unable to fetch location by IP");
+      console.error('Error fetching location by IP:', err);
+      toast.error('Unable to fetch location by IP');
     }
   }, [updateLocation, currentCoordinate]);
 
   const getUserLocation = useCallback(async () => {
     if (!navigator.geolocation) {
-      throw new Error("Geolocation is not supported by your browser");
+      throw new Error('Geolocation is not supported by your browser');
     }
     try {
-      const position = await new Promise<GeolocationPosition>(
-        (resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject, {
-            timeout: 10000,
-          });
-        }
-      );
+      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          timeout: 10000,
+        });
+      });
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       updateLocation(lat, lon);
       currentCoordinate(lat, lon);
     } catch (error) {
-      toast.error("Unable to fetch location, fetching by IP... ");
-      console.error("Error getting location:", error);
+      toast.error('Unable to fetch location, fetching by IP... ');
+      console.error('Error getting location:', error);
       await getCityByIP();
     }
   }, [updateLocation, currentCoordinate, getCityByIP]);
@@ -85,12 +82,12 @@ export default function WeatherDashboard() {
   }, [latitude, longitude, unit, fetchData]);
 
   const toggleUnits = () => {
-    setUnit(unit === "metric" ? "imperial" : "metric");
+    setUnit(unit === 'metric' ? 'imperial' : 'metric');
     if (weatherData && forecastData && latitude && longitude) {
       fetchData({
         lat: latitude,
         lon: longitude,
-        unit: unit === "metric" ? "imperial" : "metric",
+        unit: unit === 'metric' ? 'imperial' : 'metric',
       });
     }
   };
@@ -98,11 +95,11 @@ export default function WeatherDashboard() {
   useEffect(() => {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 16) {
-      setBackgroundImage("/backgrounds/morning.png");
+      setBackgroundImage('/backgrounds/morning.png');
     } else if (hour >= 16 && hour < 19) {
-      setBackgroundImage("/backgrounds/evening.jpg");
+      setBackgroundImage('/backgrounds/evening.jpg');
     } else {
-      setBackgroundImage("/backgrounds/night.png");
+      setBackgroundImage('/backgrounds/night.png');
     }
   }, []);
 
@@ -119,9 +116,9 @@ export default function WeatherDashboard() {
         setSearchPanelOpen(false);
       }
     };
-    document.addEventListener("mousedown", handler);
+    document.addEventListener('mousedown', handler);
     return () => {
-      document.removeEventListener("mousedown", handler);
+      document.removeEventListener('mousedown', handler);
     };
   }, [searchMenuRef, searchButtonRef, searchInputRef]);
 
@@ -142,37 +139,35 @@ export default function WeatherDashboard() {
         />
       )}
       <div
-        className="overflow-auto no-scrollbar max-h-screen"
+        className="no-scrollbar max-h-screen overflow-auto"
         style={{
           backgroundImage: `url(${background})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
         }}
       >
         <div>
           <WeatherHeader
             searchPanelOpen={searchPanelOpen}
             setSearchPanelOpen={setSearchPanelOpen}
-            searchButtonRef={
-              searchButtonRef as React.RefObject<HTMLButtonElement>
-            }
+            searchButtonRef={searchButtonRef as React.RefObject<HTMLButtonElement>}
           />
         </div>
         <div className="p-4 pt-24">
-          <div className="flex gap-10 flex-col xl:flex-row items-center justify-center">
-            <div className="xl:w-[60%] ">
+          <div className="flex flex-col items-center justify-center gap-10 xl:flex-row">
+            <div className="xl:w-[60%]">
               <CurrentWeather units={unit} onToggleUnits={toggleUnits} />
             </div>
-            <div className="flex flex-col gap-5 xl:w-[40%] w-full">
+            <div className="flex w-full flex-col gap-5 xl:w-[40%]">
               <div className="h-[230px]">
                 <LineGraph />
               </div>
-              <div className="flex flex-col sm:flex-row gap-5">
-                <div className="h-[230px] p-2 w-full sm:w-[60%] shadow-sm border bg-white/10 rounded-xl">
+              <div className="flex flex-col gap-5 sm:flex-row">
+                <div className="h-[230px] w-full rounded-xl border bg-white/10 p-2 shadow-sm sm:w-[60%]">
                   <RadarGraph />
                 </div>
-                <div className="h-[230px] p-2 w-full sm:w-[40%] shadow-sm border bg-white/10 rounded-xl">
+                <div className="h-[230px] w-full rounded-xl border bg-white/10 p-2 shadow-sm sm:w-[40%]">
                   <PieGraph />
                 </div>
               </div>

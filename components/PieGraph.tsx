@@ -1,9 +1,9 @@
-import { countWeatherTypes } from "@/lib/countWeatherTypes";
-import { WeatherStoreType } from "@/lib/types";
-import WeatherStore from "@/stores/weather-store";
-import React from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import Loader from "./Loader";
+import { countWeatherTypes } from '@/lib/countWeatherTypes';
+import { WeatherStoreType } from '@/lib/types';
+import WeatherStore from '@/stores/weather-store';
+import React from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import Loader from './Loader';
 
 export default function PieGraph() {
   const store: WeatherStoreType = WeatherStore();
@@ -11,7 +11,7 @@ export default function PieGraph() {
 
   const data = countWeatherTypes(forecastData?.list || []);
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
@@ -39,7 +39,7 @@ export default function PieGraph() {
         x={x}
         y={y}
         fill="white"
-        textAnchor={x > cx ? "start" : "end"}
+        textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
       >
         {`${(percent * 100).toFixed(0)}%`}
@@ -48,7 +48,7 @@ export default function PieGraph() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-white/10 backdrop-blur-sm rounded-xl shadow-sm border">
+    <div className="flex h-full w-full flex-col items-center justify-center rounded-xl border bg-white/10 shadow-sm backdrop-blur-sm">
       {isLoading ? (
         <Loader />
       ) : (
@@ -67,10 +67,7 @@ export default function PieGraph() {
                 label={renderCustomizedLabel}
               >
                 {data.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
               <Tooltip />

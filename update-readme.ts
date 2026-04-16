@@ -1,48 +1,59 @@
-import { readFileSync, writeFileSync } from "node:fs";
-import https from "node:https";
-import type { IncomingMessage } from "node:http";
+import { readFileSync, writeFileSync } from 'node:fs';
+import https from 'node:https';
+import type { IncomingMessage } from 'node:http';
 
-function fetchURL(): Promise<string> {
-    return new Promise((resolve, reject) => {
-        https
-            .get("https://pget.vercel.app/", (res: IncomingMessage) => {
-                let data = "";
+interface PortfolioData {
+  portfolio?: string;
+  github?: string;
+  linkedin?: string;
+  x?: string;
+}
 
-                res.on("data", (chunk: Buffer | string) => {
-                    data += chunk.toString();
-                });
+function fetchURL(): Promise<PortfolioData> {
+  return new Promise((resolve, reject) => {
+    https
+      .get('https://pget.vercel.app/', (res: IncomingMessage) => {
+        let data = '';
 
-                res.on("end", () => {
-                    let cleaned = data.trim();
+        res.on('data', (chunk: Buffer | string) => {
+          data += chunk.toString();
+        });
 
-                    try {
-                        const parsed = JSON.parse(cleaned) as { url?: string };
-                        cleaned = parsed.url ?? cleaned;
-                    } catch {
-                        // not JSON → continue
-                    }
+        res.on('end', () => {
+          let cleaned = data.trim();
 
-                    cleaned = cleaned.replace(/^"(.*)"$/, "$1");
+          try {
+            const parsed = JSON.parse(cleaned) as PortfolioData;
+            resolve(parsed);
+            return;
+          } catch {
+            // not JSON → continue
+          }
 
-                    resolve(cleaned);
-                });
-            })
-            .on("error", reject);
-    });
+          resolve({});
+        });
+      })
+      .on('error', reject);
+  });
 }
 
 async function main(): Promise<void> {
-    try {
-        const url = await fetchURL();
-        const readme = readFileSync("README.md", "utf-8");
-        const updatedReadme = readme.replace(/\[Portfolio\]\(.*?\)/, `[Portfolio](${url})`);
+  try {
+    const data = await fetchURL();
+    const readme = readFileSync('README.md', 'utf-8');
+    let updatedReadme = readme;
 
-        writeFileSync("README.md", updatedReadme);
-        console.log("Updated README with:", url);
-    } catch (err) {
-        console.error("Error:", err);
-        process.exitCode = 1;
-    }
+    updatedReadme = updatedReadme.replace(/\[Portfolio\]\(.*?\)/, `[Portfolio](${data.portfolio})`);
+    updatedReadme = updatedReadme.replace(/\[GitHub\]\(.*?\)/, `[GitHub](${data.github})`);
+    updatedReadme = updatedReadme.replace(/\[LinkedIn\]\(.*?\)/, `[LinkedIn](${data.linkedin})`);
+    updatedReadme = updatedReadme.replace(/\[Twitter\]\(.*?\)/, `[Twitter](${data.x})`);
+
+    writeFileSync('README.md', updatedReadme);
+    console.log('Updated README with:', data);
+  } catch (err) {
+    console.error('Error:', err);
+    process.exitCode = 1;
+  }
 }
 
 void main();

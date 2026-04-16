@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Search } from "@mui/icons-material";
-import { getWeather } from "@/lib/api";
-import { WeatherStoreType } from "@/lib/types";
-import WeatherStore from "@/stores/weather-store";
-import { AnimatePresence } from "framer-motion";
-import HistoryPanel from "./HistoryPanel";
-import Logo from "./Logo";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Search } from '@mui/icons-material';
+import { getWeather } from '@/lib/api';
+import { WeatherStoreType } from '@/lib/types';
+import WeatherStore from '@/stores/weather-store';
+import { AnimatePresence } from 'framer-motion';
+import HistoryPanel from './HistoryPanel';
+import Logo from './Logo';
 
 type WeatherHeaderProps = {
   searchPanelOpen: boolean;
@@ -29,14 +29,13 @@ export default function WeatherHeader({
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const [data, setData] = useState<WeatherData | null>(null);
   const store: WeatherStoreType = WeatherStore();
-  const { currentlat, currentlon, fetchWeatherData, currentCoordinate, unit } =
-    store;
+  const { currentlat, currentlon, fetchWeatherData, currentCoordinate, unit } = store;
   const historyMenuRef = useRef<HTMLDivElement>(null);
   const historyButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (currentlat && currentlon) {
-      const res = getWeather(currentlat, currentlon, "metric");
+      const res = getWeather(currentlat, currentlon, 'metric');
       res.then((data) => {
         setData(data);
       });
@@ -46,7 +45,7 @@ export default function WeatherHeader({
   const handleClick = () => {
     if (currentlat && currentlon) {
       currentCoordinate(currentlat, currentlon);
-      fetchWeatherData({ lat: currentlat, lon: currentlon, unit: "metric" });
+      fetchWeatherData({ lat: currentlat, lon: currentlon, unit: 'metric' });
     }
   };
 
@@ -61,9 +60,9 @@ export default function WeatherHeader({
         setIsSidePanelOpen(false);
       }
     };
-    document.addEventListener("mousedown", handler);
+    document.addEventListener('mousedown', handler);
     return () => {
-      document.removeEventListener("mousedown", handler);
+      document.removeEventListener('mousedown', handler);
     };
   }, [historyMenuRef, historyButtonRef]);
 
@@ -75,9 +74,9 @@ export default function WeatherHeader({
 
   return (
     <>
-      <nav className="fixed w-full flex justify-center items-center z-[52]">
-        <div className="flex items-center justify-between w-[98%] px-4 md:px-10 py-3 mt-3 backdrop-blur-md bg-black/10 text-white rounded-3xl">
-          <h1 className="text-sm md:text-lg font-bold tracking-widest flex justify-between items-center gap-1 md:gap-5">
+      <nav className="fixed z-[52] flex w-full items-center justify-center">
+        <div className="mt-3 flex w-[98%] items-center justify-between rounded-3xl bg-black/10 px-4 py-3 text-white backdrop-blur-md md:px-10">
+          <h1 className="flex items-center justify-between gap-1 text-sm font-bold tracking-widest md:gap-5 md:text-lg">
             <div className="md:hidden">
               <Logo size="xs" circle={false} />
             </div>
@@ -91,18 +90,18 @@ export default function WeatherHeader({
               onClick={() => {
                 handleClick();
               }}
-              className="flex items-center gap-1 hover:underline cursor-pointer text-xs md:text-sm"
+              className="flex cursor-pointer items-center gap-1 text-xs hover:underline md:text-sm"
             >
               <LocationOnIcon fontSize="small" />
               <span>
-                Weather in {data.name}{" "}
+                Weather in {data.name}{' '}
                 <span className="hidden sm:inline"> / {data.sys.country}</span>
               </span>
             </div>
           )}
           <div className="flex items-center gap-1">
             <Button
-              variant={"ghost"}
+              variant={'ghost'}
               className="cursor-pointer"
               onClick={() => setSearchPanelOpen(!searchPanelOpen)}
               ref={searchButtonRef}
@@ -112,7 +111,7 @@ export default function WeatherHeader({
 
             <Button
               variant="ghost"
-              className="rounded-xl cursor-pointer border bg-none"
+              className="cursor-pointer rounded-xl border bg-none"
               onClick={() => setIsSidePanelOpen(!isSidePanelOpen)}
               ref={historyButtonRef}
             >

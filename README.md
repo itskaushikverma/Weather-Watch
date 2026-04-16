@@ -1,4 +1,3 @@
-
 # Weather Watch
 
 **Weather Watch** is a modern, responsive weather dashboard built using **Next.js 15** and **React 19**, providing real-time weather updates, forecasts, and visual insights in an interactive and user-friendly interface.
@@ -28,12 +27,14 @@
 Follow these steps to run the project locally:
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/itskaushikverma/weather-watch.git
    cd weather-watch
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    # or
@@ -51,6 +52,7 @@ Follow these steps to run the project locally:
    ```
 
 4. **Run the development server:**
+
    ```bash
    npm run dev
    # or

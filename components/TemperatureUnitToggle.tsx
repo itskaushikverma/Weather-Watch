@@ -1,19 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface TemperatureUnitToggleProps {
-  unit: "C" | "F";
-  onUnitChange: (unit: "C" | "F") => void;
+  unit: 'C' | 'F';
+  onUnitChange: (unit: 'C' | 'F') => void;
 }
 
-export default function TemperatureUnitToggle({
-  unit,
-  onUnitChange,
-}: TemperatureUnitToggleProps) {
-  const handleChange = (newUnit: "C" | "F") => {
+export default function TemperatureUnitToggle({ unit, onUnitChange }: TemperatureUnitToggleProps) {
+  const handleChange = (newUnit: 'C' | 'F') => {
     if (unit !== newUnit) {
       onUnitChange(newUnit);
     }
@@ -30,23 +27,23 @@ export default function TemperatureUnitToggle({
         title="Change temperature unit"
       >
         <button
-          onClick={() => handleChange("C")}
+          onClick={() => handleChange('C')}
           className={cn(
-            "w-10 text-sm font-medium transition-colors cursor-pointer",
-            unit === "C"
-              ? "bg-blue-100 text-blue-600 dark:bg-blue-200/20 dark:text-blue-400"
-              : "text-white/80 hover:bg-white/10"
+            'w-10 cursor-pointer text-sm font-medium transition-colors',
+            unit === 'C'
+              ? 'bg-blue-100 text-blue-600 dark:bg-blue-200/20 dark:text-blue-400'
+              : 'text-white/80 hover:bg-white/10',
           )}
         >
           °C
         </button>
         <button
-          onClick={() => handleChange("F")}
+          onClick={() => handleChange('F')}
           className={cn(
-            "w-10 text-sm font-medium transition-colors cursor-pointer",
-            unit === "F"
-              ? "bg-blue-100 text-blue-600 dark:bg-blue-200/20 dark:text-blue-400"
-              : "text-white/80 hover:bg-white/10"
+            'w-10 cursor-pointer text-sm font-medium transition-colors',
+            unit === 'F'
+              ? 'bg-blue-100 text-blue-600 dark:bg-blue-200/20 dark:text-blue-400'
+              : 'text-white/80 hover:bg-white/10',
           )}
         >
           °F
