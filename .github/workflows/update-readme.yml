@@ -2,7 +2,7 @@ name: Added Social Media Link to README
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '30 18 */2 * *'
   workflow_dispatch:
 
 permissions:
