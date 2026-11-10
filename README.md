@@ -79,4 +79,4 @@ See the [LICENSE](./LICENSE) file for more information.
 ## 👨‍💻 Author
 
 **Kaushik Verma**  
-[LinkedIn](https://www.linkedin.com/in/itskaushikverma) | [Portfolio](https://www.kaushikverma.com) | [GitHub](https://github.com/itskaushikverma) | [Twitter](undefined)
+[LinkedIn](undefined) | [Portfolio](undefined) | [GitHub](undefined) | [Twitter](undefined)
